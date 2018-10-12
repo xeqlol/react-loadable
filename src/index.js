@@ -18,8 +18,8 @@ function isWebpackReady(getModuleIds) {
   });
 }
 
-function load(loader) {
-  let promise = loader();
+function load(loader, args) {
+  let promise = loader(args);
 
   let state = {
     loading: true,
@@ -110,7 +110,8 @@ function createLoadableComponent(loadFn, options) {
       timeout: null,
       render: render,
       webpack: null,
-      modules: null
+      modules: null,
+      loaderArgs: null
     },
     options
   );
@@ -119,7 +120,7 @@ function createLoadableComponent(loadFn, options) {
 
   function init() {
     if (!res) {
-      res = loadFn(opts.loader);
+      res = loadFn(opts.loader, opts.loaderArgs);
     }
     return res.promise;
   }

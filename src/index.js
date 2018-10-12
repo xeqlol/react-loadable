@@ -1,19 +1,19 @@
-"use strict";
-const React = require("react");
-const PropTypes = require("prop-types");
+'use strict';
+const React = require('react');
+const PropTypes = require('prop-types');
 
 const ALL_INITIALIZERS = [];
 const READY_INITIALIZERS = [];
 
 function isWebpackReady(getModuleIds) {
-  if (typeof __webpack_modules__ !== "object") {
+  if (typeof __webpack_modules__ !== 'object') {
     return false;
   }
 
   return getModuleIds().every(moduleId => {
     return (
-      typeof moduleId !== "undefined" &&
-      typeof __webpack_modules__[moduleId] !== "undefined"
+      typeof moduleId !== 'undefined' &&
+      typeof __webpack_modules__[moduleId] !== 'undefined'
     );
   });
 }
@@ -99,7 +99,7 @@ function render(loaded, props) {
 
 function createLoadableComponent(loadFn, options) {
   if (!options.loading) {
-    throw new Error("react-loadable requires a `loading` component");
+    throw new Error('react-loadable requires a `loading` component');
   }
 
   let opts = Object.assign(
@@ -127,7 +127,7 @@ function createLoadableComponent(loadFn, options) {
 
   ALL_INITIALIZERS.push(init);
 
-  if (typeof opts.webpack === "function") {
+  if (typeof opts.webpack === 'function') {
     READY_INITIALIZERS.push(() => {
       if (isWebpackReady(opts.webpack)) {
         return init();
@@ -175,7 +175,7 @@ function createLoadableComponent(loadFn, options) {
         return;
       }
 
-      if (typeof opts.delay === "number") {
+      if (typeof opts.delay === 'number') {
         if (opts.delay === 0) {
           this.setState({ pastDelay: true });
         } else {
@@ -185,7 +185,7 @@ function createLoadableComponent(loadFn, options) {
         }
       }
 
-      if (typeof opts.timeout === "number") {
+      if (typeof opts.timeout === 'number') {
         this._timeout = setTimeout(() => {
           this.setState({ timedOut: true });
         }, opts.timeout);
@@ -253,8 +253,8 @@ function Loadable(opts) {
 }
 
 function LoadableMap(opts) {
-  if (typeof opts.render !== "function") {
-    throw new Error("LoadableMap requires a `render(loaded, props)` function");
+  if (typeof opts.render !== 'function') {
+    throw new Error('LoadableMap requires a `render(loaded, props)` function');
   }
 
   return createLoadableComponent(loadMap, opts);

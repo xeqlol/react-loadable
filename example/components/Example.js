@@ -1,12 +1,12 @@
-import React from "react";
-import Loadable from "react-loadable";
-import Loading from "./Loading";
-import delay from "../utils/delay";
-import path from "path";
+import React from 'react';
+import Loadable from 'react-loadable';
+import Loading from './Loading';
+import delay from '../utils/delay';
+import path from 'path';
 
 const LoadableNested = Loadable({
   loader: ({ store, sagaMiddleware }) => {
-    return import("./ExampleNested").then(module => {
+    return import('./ExampleNested').then(module => {
       const { container, reducers, sagas } = module.default;
       store.replaceReducer(reducers());
       sagaMiddleware.run(sagas());
